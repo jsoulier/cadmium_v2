@@ -72,7 +72,7 @@ namespace cadmium {
         }
 
         void simulate(double maxTime = std::numeric_limits<double>::infinity()) {
-            auto forEach = [](const std::vector<size_t>& cells, const auto& function) {
+            const auto forEach = [](const std::vector<size_t>& cells, const auto& function) {
                 static constexpr size_t kParallelThreshold = 256;
                 if (cells.size() >= kParallelThreshold) {
                     std::for_each(std::execution::par, cells.begin(), cells.end(), function);
@@ -95,11 +95,11 @@ namespace cadmium {
             std::vector<std::vector<OneToOneCoupling>> inCouplings(cellCount);
             std::vector<std::vector<size_t>> outCellIndices(cellCount);
             for (const auto& [portTo, portsFrom]: couplings) {
-                const size_t destinationCellIndex = cellToIndex.at(portTo->getParent());
+                const size_t dstCellIndex = cellToIndex.at(portTo->getParent());
                 for (const auto& portFrom: portsFrom) {
-                    const size_t sourceCellIndex = cellToIndex.at(portFrom->getParent());
-                    inCouplings[destinationCellIndex].emplace_back(portTo, portFrom);
-                    outCellIndices[sourceCellIndex].push_back(destinationCellIndex);
+                    const size_t srcCellIndex = cellToIndex.at(portFrom->getParent());
+                    inCouplings[dstCellIndex].emplace_back(portTo, portFrom);
+                    outCellIndices[srcCellIndex].push_back(dstCellIndex);
                 }
             }
             // frame 1: all cells need to be computed
