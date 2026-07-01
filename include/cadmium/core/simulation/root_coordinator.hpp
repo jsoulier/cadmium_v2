@@ -16,8 +16,8 @@
 #include <vector>
 #include "coordinator.hpp"
 #include "../logger/logger.hpp"
-#if 1 // [wildfire_simulation]
-#include <cadmium/wildfire_simulation/profile.hpp>
+#if 1 // [cadmium_v2]
+#include <cadmium/core/profile/profile.hpp>
 #endif
 
 namespace cadmium {
@@ -28,7 +28,7 @@ namespace cadmium {
 		std::shared_ptr<Logger> logger;               //!< Pointer to simulation logger.
 
 		void simulationAdvance(double timeNext) {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 			if (logger != nullptr) {
@@ -60,7 +60,7 @@ namespace cadmium {
 		}
 
 		void start() {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 			if (logger != nullptr) {
@@ -71,7 +71,7 @@ namespace cadmium {
 		}
 
 		void stop() {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 			topCoordinator->stop(topCoordinator->getTimeLast());
@@ -81,7 +81,7 @@ namespace cadmium {
 		}
 
 		[[maybe_unused]] void simulate(long nIterations) {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
             // Firsts, we make sure that Mutexes are not activated
@@ -96,7 +96,7 @@ namespace cadmium {
         }
 
 		[[maybe_unused]] void simulate(double timeInterval) {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
             // Firsts, we make sure that Mutexes are not activated

@@ -11,7 +11,7 @@
 #define CADMIUM_CELLDEVS_GRID_COUPLED_HPP_
 
 #include <nlohmann/json.hpp>
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <functional>
 #endif
 #include <memory>
@@ -21,8 +21,8 @@
 #include "utility.hpp"
 #include "../core/coupled.hpp"
 #include "../../core/exception.hpp"
-#if 1 // [wildfire_simulation]
-#include <cadmium/wildfire_simulation/profile.hpp>
+#if 1 // [cadmium_v2]
+#include <cadmium/core/profile/profile.hpp>
 #endif
 
 namespace cadmium::celldevs {
@@ -31,7 +31,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 	using gridCellFactory = std::shared_ptr<GridCell<S, V>>(*)(const coordinates & cellId, const std::shared_ptr<const GridCellConfig<S, V>>& cellConfig);
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 	using gridCellFactory = std::function<std::shared_ptr<GridCell<S, V>>(const coordinates & cellId, const std::shared_ptr<const GridCellConfig<S, V>>& cellConfig)>;
 #endif
 
@@ -46,7 +46,7 @@ namespace cadmium::celldevs {
 		using CellDEVSCoupled<coordinates, S, V>::rawConfig;
 		std::shared_ptr<GridScenario> scenario;  //!< Pointer to the scenario configuration.
 		gridCellFactory<S, V> factory;           //!< Pointer to grid cell factory function.
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 
 		void loadScenario() {
 			CADMIUM_PROFILE_TAG;
@@ -74,7 +74,7 @@ namespace cadmium::celldevs {
 			auto wrapped = rawScenario.contains("wrapped") && rawScenario["wrapped"].get<bool>();
 			scenario = std::make_shared<GridScenario>(shape, origin, wrapped);
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			loadScenario();
 		}
 

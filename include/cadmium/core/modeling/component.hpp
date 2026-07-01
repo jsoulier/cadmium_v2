@@ -15,7 +15,7 @@
 #include <sstream>
 #include <string>
 #include <unordered_map>
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <ankerl/unordered_dense.h>
 #endif
 #include <utility>
@@ -39,7 +39,7 @@ namespace cadmium {
 		std::unordered_map<std::string, std::shared_ptr<PortInterface>> inPorts;   //!< Input ports of the component.
         std::unordered_map<std::string, std::shared_ptr<PortInterface>> outPorts;  //!< Output ports of the component.
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		ankerl::unordered_dense::map<std::string, std::shared_ptr<PortInterface>> inPorts;   //!< Input ports of the component.
         ankerl::unordered_dense::map<std::string, std::shared_ptr<PortInterface>> outPorts;  //!< Output ports of the component.
 #endif
@@ -91,7 +91,7 @@ namespace cadmium {
 #if 0 // [cadmium_v2]
             return inPorts.find(port->getId()) != inPorts.end() && inPorts.at(port->getId()) == port;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			const auto it = inPorts.find(port->getId());
 			return it != inPorts.end() && it->second == port;
 #endif
@@ -106,7 +106,7 @@ namespace cadmium {
 #if 0 // [cadmium_v2]
             return outPorts.find(port->getId()) != outPorts.end() && outPorts.at(port->getId()) == port;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			const auto it = outPorts.find(port->getId());
 			return it != outPorts.end() && it->second == port;
 #endif
@@ -278,7 +278,7 @@ namespace cadmium {
 			std::for_each(serialOutPorts.begin(), serialOutPorts.end(), [](auto& port) { port->clear(); });
 		}
 
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		void releasePortLookups() {
 			inPorts = {};
 			outPorts = {};

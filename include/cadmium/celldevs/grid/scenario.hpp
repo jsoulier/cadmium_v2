@@ -12,7 +12,7 @@
 
 #include <algorithm>
 #include <cmath>
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <climits>
 #endif
 #include <numeric>
@@ -32,7 +32,7 @@ namespace cadmium::celldevs {
 		const coordinates origin;  //!< coordinates of the origin cell. In 2D scenarios, it corresponds to the upper-left cell.
 		const bool wrapped;        //!< if true, the scenario is wrapped.
 
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 	 private:
 		// deduped moore neighborhoods to save memory (keyed by range)
 		mutable std::vector<std::pair<int, std::vector<coordinates>>> mooreNeighborhoods;
@@ -58,7 +58,7 @@ namespace cadmium::celldevs {
 			if (shape.size() != origin.size()) {
 				throw CadmiumModelException("shape-origin dimension mismatch");
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			for (glm::length_t i = 0; i < coordinates::length(); ++i) {
 				if (shape[i] < 1) {
 					throw CadmiumModelException("invalid scenario shape");
@@ -79,7 +79,7 @@ namespace cadmium::celldevs {
 				return a >= 0 && a < shape[i++];
 			});
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			for (glm::length_t i = 0; i < coordinates::length(); ++i) {
 				int a = cell[i] - origin[i];
 				if (a < 0 || a >= shape[i]) {
@@ -101,7 +101,7 @@ namespace cadmium::celldevs {
 				return std::abs(a) < shape[i++];
 			});
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			for (glm::length_t i = 0; i < coordinates::length(); ++i) {
 				if (std::abs(distance[i]) >= shape[i]) {
 					return false;
@@ -125,7 +125,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 			for (int i = 0; i < shape.size(); ++i) {
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			for (glm::length_t i = 0; i < coordinates::length(); ++i) {
 #endif
 				int d = cellTo[i] - cellFrom[i];
@@ -135,7 +135,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 				distance.push_back(d);
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 				distance[i] = d;
 #endif
 			}
@@ -163,7 +163,7 @@ namespace cadmium::celldevs {
 			for (int i = 0; i < shape.size(); ++i) {
 				auto v = cellFrom[i] + distance[i];
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			for (glm::length_t i = 0; i < coordinates::length(); ++i) {
 				int v = cellFrom[i] + distance[i];
 #endif
@@ -173,7 +173,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 				cellTo.push_back(v);
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 				cellTo[i] = v;
 #endif
 			}
@@ -201,7 +201,7 @@ namespace cadmium::celldevs {
 			for (int i = 0; i < shape.size(); ++i) {
 				auto v = cellTo[i] - distance[i];
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			for (glm::length_t i = 0; i < coordinates::length(); ++i) {
 				int v = cellTo[i] - distance[i];
 #endif
@@ -211,7 +211,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 				cellFrom.push_back(v);
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 				cellFrom[i] = v;
 #endif
 			}
@@ -265,7 +265,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 			auto x = std::accumulate(distance.begin(), distance.end(), 0., [p](double sum, int v) { return sum + std::pow(std::abs(v), p); });
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			double x = 0.0;
 			for (glm::length_t i = 0; i < coordinates::length(); ++i) {
 				x += std::pow(std::abs(distance[i]), p);
@@ -283,7 +283,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 			return std::accumulate(distance.begin(), distance.end(), 0, [](int sum, int v) { return sum + std::abs(v); });
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			int total = 0;
 			for (glm::length_t i = 0; i < coordinates::length(); ++i) {
 				total += std::abs(distance[i]);
@@ -301,7 +301,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 			return *std::max_element(distance.begin(), distance.end(), [](int a, int b) { return std::abs(a) < std::abs(b); });
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			int maxValue = distance[0];
 			for (glm::length_t i = 1; i < coordinates::length(); ++i) {
 				if (std::abs(distance[i]) > std::abs(maxValue)) {
@@ -320,7 +320,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 		[[nodiscard]] std::vector<coordinates> mooreNeighborhood(int range) const {
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		[[nodiscard]] const std::vector<coordinates>& mooreNeighborhood(int range) const {
 			for (const auto& [otherRange, otherNeighborhood]: mooreNeighborhoods) {
 				if (otherRange == range) {
@@ -337,7 +337,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 			return neighborhood;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			return mooreNeighborhoods.emplace_back(range, std::move(neighborhood)).second;
 #endif
 		}
@@ -387,7 +387,7 @@ namespace cadmium::celldevs {
 			auto nShape = coordinates(shape.size(), 2 * range + 1);
 			auto nOrigin = coordinates(shape.size(), -range);
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			auto nShape = coordinates(2 * range + 1);
 			auto nOrigin = coordinates(-range);
 #endif
@@ -409,7 +409,7 @@ namespace cadmium::celldevs {
 				if (d < 0 || d >= cell.size()) {
 					cell = {};
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 				if (d >= coordinates::length()) {
 					cell = coordinates(INT_MAX);
 #endif
@@ -431,7 +431,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 				if (!(this->cell.empty() || scenario->cellInScenario(this->cell))) {
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 				if (this->cell != coordinates(INT_MAX) && !scenario->cellInScenario(this->cell)) {
 #endif
 					throw CadmiumModelException("Invalid iterator");
@@ -465,7 +465,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 			return {this, {}};
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			return {this, coordinates(INT_MAX)};
 #endif
 		}

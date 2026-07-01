@@ -14,8 +14,8 @@
 #include <memory>
 #include <utility>
 #include "queue.hpp"
-#if 1 // [wildfire_simulation]
-#include <cadmium/wildfire_simulation/profile.hpp>
+#if 1 // [cadmium_v2]
+#include <cadmium/core/profile/profile.hpp>
 #endif
 
 namespace cadmium::celldevs {

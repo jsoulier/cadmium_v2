@@ -13,8 +13,8 @@
 #include <mutex>
 #include <optional>
 #include <string>
-#if 1 // [wildfire_simulation]
-#include <cadmium/wildfire_simulation/profile.hpp>
+#if 1 // [cadmium_v2]
+#include <cadmium/core/profile/profile.hpp>
 #endif
 
 namespace cadmium {
@@ -41,7 +41,7 @@ namespace cadmium {
 
         //! It locks the logger mutex (if needed).
         inline void lock() {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG
 #endif
             if (mutex.has_value()) {
@@ -51,7 +51,7 @@ namespace cadmium {
 
         //! It unlocks the logger mutex (if needed).
         inline void unlock() {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG
 #endif
             if (mutex.has_value()) {

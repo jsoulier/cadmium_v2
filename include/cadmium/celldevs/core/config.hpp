@@ -14,7 +14,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 #include <unordered_map>
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <ankerl/unordered_dense.h>
 #endif
 #include <utility>
@@ -49,7 +49,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 		virtual std::unordered_map<C, NeighborData<S, V>> buildNeighborhood(const C& cellId) const = 0;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		virtual Neighborhood<C, S, V> buildNeighborhood(const C& cellId) const = 0;
 #endif
 

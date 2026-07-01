@@ -924,7 +924,7 @@ public:
     using difference_type = typename value_container_type::difference_type;
     using hasher = Hash;
     using key_equal = KeyEqual;
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
     using key_compare = std::less<key_type>;
 #endif
     using allocator_type = typename value_container_type::allocator_type;

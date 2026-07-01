@@ -1,6 +1,6 @@
-#ifndef CADMIUM_WILDFIRE_SIMULATION_PROFILE_HPP_
-#define CADMIUM_WILDFIRE_SIMULATION_PROFILE_HPP_
-#if 1 // [wildfire_simulation]
+#ifndef CADMIUM_CORE_PROFILE_PROFILE_HPP_
+#define CADMIUM_CORE_PROFILE_PROFILE_HPP_
+#if 1 // [cadmium_v2]
 
 #if USE_TRACY
 #include <tracy/Tracy.hpp>
@@ -15,5 +15,5 @@
 #define CADMIUM_PROFILE_PLOT(name, value)
 #endif
 
-#endif // [wildfire_simulation]
-#endif // CADMIUM_WILDFIRE_SIMULATION_PROFILE_HPP_
+#endif // [cadmium_v2]
+#endif // CADMIUM_CORE_PROFILE_PROFILE_HPP_

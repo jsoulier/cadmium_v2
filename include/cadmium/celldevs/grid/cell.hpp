@@ -25,7 +25,7 @@ namespace cadmium::celldevs {
 	 */
 	template <typename S, typename V>
 	class GridCell: public Cell<coordinates, S, V> {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 	 protected:
 #endif
 		using Cell<coordinates, S, V>::id;                   //!< Cell ID (i.e., cell position in the grid).

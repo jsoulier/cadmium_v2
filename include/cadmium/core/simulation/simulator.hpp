@@ -16,8 +16,8 @@
 #include "../exception.hpp"
 #include "../logger/logger.hpp"
 #include "../modeling/atomic.hpp"
-#if 1 // [wildfire_simulation]
-#include <cadmium/wildfire_simulation/profile.hpp>
+#if 1 // [cadmium_v2]
+#include <cadmium/core/profile/profile.hpp>
 #endif
 
 namespace cadmium {
@@ -67,7 +67,7 @@ namespace cadmium {
          * @param time initial simulation time.
          */
         void start(double time) override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG;
 #endif
             timeLast = time;
@@ -83,7 +83,7 @@ namespace cadmium {
          * @param time final simulation time.
          */
         void stop(double time) override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG;
 #endif
             timeLast = time;

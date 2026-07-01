@@ -13,7 +13,7 @@
 #include <nlohmann/json.hpp>
 #include <memory>
 #include <utility>
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <vector>
 #endif
 #include "../grid/utility.hpp"
@@ -38,7 +38,7 @@ namespace cadmium::celldevs {
 		 */
 		explicit NeighborData(V vicinity) : state(), vicinity(std::move(vicinity)) {}
 	};
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 	template<typename C, typename S, typename V>
 	using Neighborhood = std::vector<std::pair<C, NeighborData<S, V>>>;
 #endif

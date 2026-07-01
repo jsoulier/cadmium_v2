@@ -1,5 +1,4 @@
 /**
- * Brute-force parallel root coordinator (std::execution::par).
  * SPDX-License-Identifier: MIT
  * Copyright (c) 2021-present jsoulier
  * ARSLab - Carleton University
@@ -18,24 +17,23 @@
 #include <vector>
 #include "coordinator.hpp"
 #include "../logger/logger.hpp"
-#if 1 // [wildfire_simulation]
-#include <cadmium/wildfire_simulation/profile.hpp>
+#if 1 // [cadmium_v2]
+#include <cadmium/core/profile/profile.hpp>
 #endif
 
 namespace cadmium {
-    //! Brute-force root coordinator: every cell is recomputed every step.
     class BruteForceRootCoordinator {
      protected:
         using ManyToOneCoupling = std::pair<std::shared_ptr<PortInterface>, std::vector<std::shared_ptr<PortInterface>>>;
 
-        std::shared_ptr<Coordinator> topCoordinator;  //!< Pointer to top coordinator.
-        std::vector<ManyToOneCoupling> couplings;     //!< Serialized IC couplings.
-        std::shared_ptr<Logger> logger;              //!< Pointer to simulation logger.
-        double lastTime;                             //!< Last simulated time.
+        std::shared_ptr<Coordinator> topCoordinator;
+        std::vector<ManyToOneCoupling> couplings;
+        std::shared_ptr<Logger> logger;
+        double lastTime;
 
      public:
         explicit BruteForceRootCoordinator(std::shared_ptr<Coupled> model): lastTime(0.0) {
-            model->flatten();  // In parallel execution, models MUST be flat
+            model->flatten();
             topCoordinator = std::make_shared<Coordinator>(model, 0.0);
             for (const auto& [portTo, portsFrom]: model->getICs()) {
                 couplings.emplace_back(portTo, portsFrom);

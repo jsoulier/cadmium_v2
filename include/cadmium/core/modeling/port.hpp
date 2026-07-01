@@ -19,8 +19,8 @@
 #include <vector>
 #include "component.hpp"
 #include "../exception.hpp"
-#if 1 // [wildfire_simulation]
-#include <cadmium/wildfire_simulation/profile.hpp>
+#if 1 // [cadmium_v2]
+#include <cadmium/core/profile/profile.hpp>
 #endif
 
 namespace cadmium {
@@ -174,7 +174,7 @@ namespace cadmium {
                 throw CadmiumModelException("invalid port type");
             }
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG;
             // static_pointer_cast here eats into performance a LOT
             const auto* typedPort = static_cast<const _Port<T>*>(portFrom.get());
@@ -191,7 +191,7 @@ namespace cadmium {
 #if 0 // [cadmium_v2]
 			std::stringstream ss;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			thread_local std::ostringstream ss;
 			ss.str("");
 			ss.clear();
@@ -228,7 +228,7 @@ namespace cadmium {
          * @param message new message to be added to the bag.
          */
         void addMessage(const T message) {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG;
 #endif
             bag.push_back(std::make_shared<const T>(std::move(message)));
@@ -253,7 +253,7 @@ namespace cadmium {
 #if 0 // [cadmium_v2]
 			std::stringstream ss;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			thread_local std::ostringstream ss;
 			ss.str("");
 			ss.clear();

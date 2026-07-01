@@ -14,7 +14,7 @@
 #include <memory> // allocator
 #include <string> // string
 #include <vector> // vector
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <ankerl/unordered_dense.h>
 #endif
 
@@ -65,7 +65,7 @@ class json_pointer;
 #if 0 // [json]
 using json = basic_json<>;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 template<typename Key, typename Value, typename... Args>
 using json_unordered_dense_map = ankerl::unordered_dense::map<Key, Value>;
 using json = basic_json<json_unordered_dense_map>;

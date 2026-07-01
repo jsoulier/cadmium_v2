@@ -18,8 +18,8 @@
 #include "../modeling/atomic.hpp"
 #include "../modeling/coupled.hpp"
 #include "../modeling/component.hpp"
-#if 1 // [wildfire_simulation]
-#include <cadmium/wildfire_simulation/profile.hpp>
+#if 1 // [cadmium_v2]
+#include <cadmium/core/profile/profile.hpp>
 #endif
 
 namespace cadmium {
@@ -87,7 +87,7 @@ namespace cadmium {
 
 		//! It updates the initial simulation time and calls to the start method of all its child simulators.
 		void start(double time) override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 			timeLast = time;
@@ -96,7 +96,7 @@ namespace cadmium {
 
 		//! It  updates the final simulation time and calls to the stop method of all its child simulators.
 		void stop(double time) override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 			timeLast = time;
@@ -108,7 +108,7 @@ namespace cadmium {
 		 * @param time new simulation time.
 		 */
 		void collection(double time) override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 			if (time >= timeNext) {
@@ -127,7 +127,7 @@ namespace cadmium {
 		 * @param time new simulation time.
 		 */
 		void transition(double time) override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
             for (auto& [portFrom, portTo]: model->getSerialEICs()) {
@@ -143,7 +143,7 @@ namespace cadmium {
 
 		//! It clears the messages from all the ports of child components.
 		void clear() override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 			std::for_each(simulators.begin(), simulators.end(), [](auto& s) { s->clear(); });

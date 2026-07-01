@@ -16,7 +16,7 @@
 #include <tuple>
 #include <typeinfo>
 #include <unordered_map>
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <ankerl/unordered_dense.h>
 #endif
 #include <utility>
@@ -32,7 +32,7 @@ namespace cadmium {
 #if 0 // [cadmium_v2]
     using MappedCouplings = std::unordered_map<std::shared_ptr<PortInterface>, std::vector<std::shared_ptr<PortInterface>>>;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
     using MappedCouplings = ankerl::unordered_dense::map<std::shared_ptr<PortInterface>, std::vector<std::shared_ptr<PortInterface>>>;
 #endif
     //! Serialized representation of couplings.
@@ -44,7 +44,7 @@ namespace cadmium {
 #if 0 // [cadmium_v2]
         std::unordered_map<std::string, std::shared_ptr<Component>> components;  //!< Components set.
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
         ankerl::unordered_dense::map<std::string, std::shared_ptr<Component>> components;  //!< Components set.
 #endif
         MappedCouplings EIC;  //!< External Input Coupling set.
@@ -80,7 +80,7 @@ namespace cadmium {
 #if 0 // [cadmium_v2]
         std::unordered_map<std::string, std::shared_ptr<Component>>& getComponents() {
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
         ankerl::unordered_dense::map<std::string, std::shared_ptr<Component>>& getComponents() {
 #endif
             return components;

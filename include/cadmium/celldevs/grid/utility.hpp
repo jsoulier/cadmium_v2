@@ -13,7 +13,7 @@
 #if 0 // [cadmium_v2]
 #include <cstddef>
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <glm/glm.hpp>
 #include <glm/gtx/hash.hpp>
 #endif
@@ -22,7 +22,7 @@
 #include <string>
 #include <vector>
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <nlohmann/json.hpp>
 #endif
 
@@ -30,7 +30,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 	using coordinates = std::vector<int>;  //!< Type alias for referring to cell coordinates
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 	using coordinates = glm::ivec2;  //!< Type alias for referring to cell coordinates
 #endif
 
@@ -50,7 +50,7 @@ namespace cadmium::celldevs {
 		}
 		os << ")";
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 	inline std::ostream &operator<<(std::ostream &os, const coordinates & v) {
 		os << v.x << "," << v.y;
 #endif
@@ -78,7 +78,7 @@ struct std::hash<std::vector<T>> {
 		for(const auto &i: vec) {
 			seed ^= hash<T>()(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 namespace nlohmann {
 	template <>
 	struct adl_serializer<cadmium::celldevs::coordinates> {
@@ -92,7 +92,7 @@ namespace nlohmann {
 	}
 };
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 	};
 }  // namespace nlohmann
 #endif

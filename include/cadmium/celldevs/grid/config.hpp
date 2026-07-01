@@ -13,7 +13,7 @@
 #include <memory>
 #include <nlohmann/json.hpp>
 #include <unordered_map>
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <ankerl/unordered_dense.h>
 #endif
 #include <utility>
@@ -22,8 +22,8 @@
 #include "utility.hpp"
 #include "../core/config.hpp"
 #include "../../core/exception.hpp"
-#if 1 // [wildfire_simulation]
-#include <cadmium/wildfire_simulation/profile.hpp>
+#if 1 // [cadmium_v2]
+#include <cadmium/core/profile/profile.hpp>
 #endif
 
 namespace cadmium::celldevs {
@@ -41,7 +41,7 @@ namespace cadmium::celldevs {
 		std::unordered_map<coordinates, NeighborData<S, V>> absolute;  //!< Pre-processed neighborhood (only absolute neighbors).
 		std::unordered_map<coordinates, NeighborData<S, V>> relative;  //!< Pre-processed neighborhood (only relative neighbors).
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		ankerl::unordered_dense::map<coordinates, NeighborData<S, V>> absolute;  //!< Pre-processed neighborhood (only absolute neighbors).
 		ankerl::unordered_dense::map<coordinates, NeighborData<S, V>> relative;  //!< Pre-processed neighborhood (only relative neighbors).
 #endif
@@ -116,7 +116,7 @@ namespace cadmium::celldevs {
 					}
 				}
 			}
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			rawNeighborhood = {};
 #endif
 		}
@@ -130,7 +130,7 @@ namespace cadmium::celldevs {
 		std::unordered_map<coordinates, NeighborData<S, V>> buildNeighborhood(const coordinates& cellId) const override {
 			std::unordered_map<coordinates, NeighborData<S, V>> neighborhood;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		Neighborhood<coordinates, S, V> buildNeighborhood(const coordinates& cellId) const override {
 			Neighborhood<coordinates, S, V> neighborhood;
 #endif
@@ -139,7 +139,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 					neighborhood[scenario->cellTo(cellId, distance)] = vicinity;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 					setNeighbor(neighborhood, scenario->cellTo(cellId, distance), vicinity);
 #endif
 				} catch (CadmiumModelException&) {
@@ -150,12 +150,12 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 				neighborhood[neighbor] = vicinity;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 				setNeighbor(neighborhood, neighbor, vicinity);
 #endif
 			}
 			return neighborhood;
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		}
 
 	 private:

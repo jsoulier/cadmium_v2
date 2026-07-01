@@ -13,7 +13,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 #include <unordered_map>
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <ankerl/unordered_dense.h>
 #endif
 #include "../core/config.hpp"
@@ -46,7 +46,7 @@ namespace cadmium::celldevs {
 		std::unordered_map<std::string, NeighborData<S, V>> buildNeighborhood(const std::string& cellId) const override {
 			return rawNeighborhood.template get<std::unordered_map<std::string, NeighborData<S, V>>>();
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		ankerl::unordered_dense::map<std::string, NeighborData<S, V>> buildNeighborhood(const std::string& cellId) const override {
 			return rawNeighborhood.template get<ankerl::unordered_dense::map<std::string, NeighborData<S, V>>>();
 #endif

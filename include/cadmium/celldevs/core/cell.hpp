@@ -13,13 +13,13 @@
 #include <sstream>
 #include <memory>
 #include <unordered_map>
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <ankerl/unordered_dense.h>
 #endif
 #include <utility>
 #include "../../core/modeling/atomic.hpp"
-#if 1 // [wildfire_simulation]
-#include <cadmium/wildfire_simulation/profile.hpp>
+#if 1 // [cadmium_v2]
+#include <cadmium/core/profile/profile.hpp>
 #endif
 #include "config.hpp"
 #include "msg.hpp"
@@ -40,14 +40,14 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 		const std::shared_ptr<const CellConfig<C, S, V>> cellConfig;	      //!< Cell configuration parameters.
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		std::shared_ptr<const CellConfig<C, S, V>> cellConfig;	      //!< Cell configuration parameters (released once the model is built).
 #endif
 		S state;                                                              //!< Cell state.
 #if 0 // [cadmium_v2]
 		std::unordered_map<C, NeighborData<S, V>> neighborhood;               //!< Cell neighborhood set.
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		Neighborhood<C, S, V> neighborhood;                                   //!< Cell neighborhood set.
 #endif
 		const std::unique_ptr<OutputQueue<S>> outputQueue;                    //!< Cell output queue ruled by a given delay type function.
@@ -80,7 +80,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 		virtual S localComputation(S state, const std::unordered_map<C, NeighborData<S, V>>& neighborhood) const = 0;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		virtual S localComputation(S state, const Neighborhood<C, S, V>& neighborhood) const = 0;
 #endif
 
@@ -100,7 +100,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 			std::stringstream ss;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			thread_local std::ostringstream ss;
 			ss.str("");
 			ss.clear();
@@ -118,13 +118,13 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 		const std::unordered_map<C, NeighborData<S, V>>& getNeighborhood() const {
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		const Neighborhood<C, S, V>& getNeighborhood() const {
 #endif
 			return neighborhood;
 		}
 
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		void freeCellConfig() {
 			cellConfig.reset();
 		}
@@ -140,7 +140,7 @@ namespace cadmium::celldevs {
 
 		//! The internal transition function cleans the output queue and updates the clock and sigma.
 		void internalTransition() override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 			outputQueue->pop();
@@ -155,7 +155,7 @@ namespace cadmium::celldevs {
 		 * @param e elapsed time from the last event.
 		 */
 		void externalTransition(double e) override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 			clock += e;
@@ -164,7 +164,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 				neighborhood.at(msg->cellId).state = msg->state;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 				for (auto& [neighborId, neighborData]: neighborhood) {
 					if (neighborId == msg->cellId) {
 						neighborData.state = msg->state;
@@ -179,7 +179,7 @@ namespace cadmium::celldevs {
 				sigma = outputQueue->nextTime() - clock;
 			}
 			state = nextState;
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			// reclaim some memory when the cell's final state is known
 			if (isComplete()) {
 				freeNeighborhood();
@@ -194,7 +194,7 @@ namespace cadmium::celldevs {
 
 		//! The output function outputs the next state scheduled in the queue through the outputNeighborhood port.
 		void output() override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 			auto nextState = outputQueue->nextState();
@@ -208,13 +208,13 @@ namespace cadmium::celldevs {
 		 * @return string representing the current cell state.
 		 */
 		[[nodiscard]] std::string logState() const override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 #if 0 // [cadmium_v2]
 			std::stringstream ss;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			thread_local std::stringstream ss;
 			ss.str("");
 			ss.clear();

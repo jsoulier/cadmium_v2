@@ -13,8 +13,8 @@
 #include <optional>
 #include "../core/modeling/atomic.hpp"
 #include "../core/exception.hpp"
-#if 1 // [wildfire_simulation]
-#include <cadmium/wildfire_simulation/profile.hpp>
+#if 1 // [cadmium_v2]
+#include <cadmium/core/profile/profile.hpp>
 #endif
 
 namespace cadmium::lib {
@@ -120,7 +120,7 @@ namespace cadmium::lib {
          * @param state reference to the current state of the model.
          */
         void internalTransition(IEStreamState<MSG>& state) const override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG;
 #endif
             state.clock += state.sigma;
@@ -142,7 +142,7 @@ namespace cadmium::lib {
          * @param e time elapsed since the last state transition function was triggered.
          */
         void externalTransition(IEStreamState<MSG>& state, double e) const override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG;
 #endif
             // External Events should not occur for this model
@@ -155,7 +155,7 @@ namespace cadmium::lib {
          * @param state reference to the current model state.
          */
         void output(const IEStreamState<MSG>& state) const override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG;
 #endif
             if(state.lastInputRead.has_value()){

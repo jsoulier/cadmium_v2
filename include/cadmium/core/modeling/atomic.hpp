@@ -48,7 +48,7 @@ namespace cadmium {
 		 * @param e time elapsed since the last state transition of the model.
 		 */
         virtual void confluentTransition(double e) {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG
 #endif
 			this->internalTransition();
@@ -124,7 +124,7 @@ namespace cadmium {
 		 * @param x reference to the atomic model input port set. You can READ input messages here.
 		 */
         virtual void confluentTransition(S& s, double e) const {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG
 #endif
             this->internalTransition(s);
@@ -132,35 +132,35 @@ namespace cadmium {
         }
 
         void internalTransition() override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG
 #endif
             this->internalTransition(state);
         }
 
         void externalTransition(double e) override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG
 #endif
             this->externalTransition(state, e);
         }
 
         void confluentTransition(double e) override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG
 #endif
             this->confluentTransition(state, e);
         }
 
         void output() override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG
 #endif
             this->output(state);
         }
 
         [[nodiscard]] double timeAdvance() const override {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
             CADMIUM_PROFILE_TAG
 #endif
             return this->timeAdvance(state);
@@ -171,7 +171,7 @@ namespace cadmium {
 #if 0 // [cadmium_v2]
 			std::stringstream ss;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			thread_local std::ostringstream ss;
 			ss.str("");
 			ss.clear();

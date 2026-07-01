@@ -14,14 +14,14 @@
 #include <memory>
 #include <queue>
 #include <unordered_map>
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <ankerl/unordered_dense.h>
 #endif
 #include <utility>
 #include <vector>
 #include "queue.hpp"
-#if 1 // [wildfire_simulation]
-#include <cadmium/wildfire_simulation/profile.hpp>
+#if 1 // [cadmium_v2]
+#include <cadmium/core/profile/profile.hpp>
 #endif
 
 namespace cadmium::celldevs {
@@ -40,7 +40,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 		std::unordered_map<double, std::shared_ptr<const S>> states;  //!< Unordered map {scheduled time: state to transmit}.
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		ankerl::unordered_dense::map<double, std::shared_ptr<const S>> states;  //!< Unordered map {scheduled time: state to transmit}.
 #endif
 	 public:

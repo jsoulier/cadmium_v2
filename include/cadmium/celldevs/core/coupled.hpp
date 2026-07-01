@@ -16,7 +16,7 @@
 #include <string>
 #include <tuple>
 #include <unordered_map>
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 #include <ankerl/unordered_dense.h>
 #endif
 #include <utility>
@@ -24,8 +24,8 @@
 #include "config.hpp"
 #include "../../core/modeling/coupled.hpp"
 #include "../../core/exception.hpp"
-#if 1 // [wildfire_simulation]
-#include <cadmium/wildfire_simulation/profile.hpp>
+#if 1 // [cadmium_v2]
+#include <cadmium/core/profile/profile.hpp>
 #endif
 
 namespace cadmium::celldevs {
@@ -42,7 +42,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 		std::unordered_map<std::string, std::shared_ptr<CellConfig<C, S, V>>> cellConfigs;  //!< unordered map with all the different configurations.
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		ankerl::unordered_dense::map<std::string, std::shared_ptr<CellConfig<C, S, V>>> cellConfigs;  //!< unordered map with all the different configurations.
 #endif
 	 public:
@@ -51,7 +51,7 @@ namespace cadmium::celldevs {
 			i >> rawConfig;
 		}
 
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 		CellDEVSCoupled(const std::string& id, nlohmann::json config): Coupled(id), rawConfig(std::move(config)), cellConfigs() {}
 
 #endif
@@ -77,13 +77,13 @@ namespace cadmium::celldevs {
 
 		//! It builds the Cell-DEVS model completely
 		void buildModel() {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 			loadCellConfigs();
 			addCells();
 			addCouplings();
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			rawConfig = {};
 			cellConfigs = {};
 #endif
@@ -97,7 +97,7 @@ namespace cadmium::celldevs {
 			auto defaultConfig = this->loadCellConfig("default", rawDefault);
 			cellConfigs["default"] = defaultConfig;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 			static const nlohmann::json object = nlohmann::json::object();
 			const nlohmann::json& configs = rawConfig.contains("cells") ? rawConfig["cells"] : object;
@@ -113,7 +113,7 @@ namespace cadmium::celldevs {
 
 		//! It adds all the cells according to the provided JSON configuration file.
 		void addCells() {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 			for (auto const&[configId, cellConfig]: cellConfigs) {
@@ -137,7 +137,7 @@ namespace cadmium::celldevs {
 			copyConfig.merge_patch(patch);
 			return this->loadCellConfig(configId, copyConfig);
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			nlohmann::json cellConfigCopy = cellConfig;
 			cellConfigCopy.merge_patch(patch);
 			return this->loadCellConfig(configId, cellConfigCopy);
@@ -146,7 +146,7 @@ namespace cadmium::celldevs {
 
 		//! It adds all the couplings required in the scenario according to the configuration file.
 		void addCouplings() {
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			CADMIUM_PROFILE_TAG;
 #endif
 			for (const auto& [_, cell]: Coupled::components) {
@@ -158,7 +158,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 					addIC(cellId(neighbor.first), "outputNeighborhood", cellModel->getId(), "inputNeighborhood");
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 					const std::string neighborId = cellId(neighbor.first);
 					// since non-burnable cells are omitted, the neighborhood can have references to non-existing cells
 					if (Coupled::components.find(neighborId) == Coupled::components.end()) {
@@ -174,7 +174,7 @@ namespace cadmium::celldevs {
 				for (const auto& portTo: cellConfig->EOC) {
 					addDynamicEOC(cellModel->getId(), "outputNeighborhood", portTo);  // TODO
 				}
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 				cellModel->freeCellConfig();
 #endif
 			}
@@ -189,7 +189,7 @@ namespace cadmium::celldevs {
 #if 0 // [cadmium_v2]
 			std::stringstream ss;
 #endif
-#if 1 // [wildfire_simulation]
+#if 1 // [cadmium_v2]
 			thread_local std::ostringstream ss;
 			ss.str("");
 			ss.clear();
