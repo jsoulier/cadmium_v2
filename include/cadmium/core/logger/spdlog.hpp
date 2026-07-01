@@ -21,7 +21,7 @@
 
 namespace cadmium {
     class SpdlogLogger: public Logger {
-     private:
+     protected:
         static constexpr int kQueueCapacity = 8192;
         std::shared_ptr<spdlog::logger> logger;
      public:
