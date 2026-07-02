@@ -1,14 +1,7 @@
-/**
- * SPDX-License-Identifier: MIT
- * Copyright (c) 2021-present jsoulier
- * ARSLab - Carleton University
- */
-
-
 #ifndef CADMIUM_CORE_LOGGER_SPDLOG_HPP_
 #define CADMIUM_CORE_LOGGER_SPDLOG_HPP_
 
-#if SPDLOG_ENABLE
+#if CADMIUM_SPDLOG_ENABLE
 
 #include <spdlog/async.h>
 #include <spdlog/sinks/basic_file_sink.h>

@@ -1,10 +1,3 @@
-/**
- * SPDX-License-Identifier: MIT
- * Copyright (c) 2021-present jsoulier
- * ARSLab - Carleton University
- */
-
-
 #ifndef CADMIUM_CORE_SIMULATION_EVENT_DRIVEN_ROOT_COORDINATOR_HPP_
 #define CADMIUM_CORE_SIMULATION_EVENT_DRIVEN_ROOT_COORDINATOR_HPP_
 

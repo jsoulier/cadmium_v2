@@ -10,27 +10,27 @@
 #ifndef CADMIUM_CELLDEVS_GRID_UTILILITY_HPP_
 #define CADMIUM_CELLDEVS_GRID_UTILILITY_HPP_
 
-#if 0 // [cadmium_v2]
+#if !CADMIUM_GLM_ENABLE // [cadmium_v2]
 #include <cstddef>
 #endif
-#if 1 // [cadmium_v2]
+#if CADMIUM_GLM_ENABLE // [cadmium_v2]
 #include <glm/glm.hpp>
 #include <glm/gtx/hash.hpp>
 #endif
 #include <iostream>
-#if 0 // [cadmium_v2]
+#if !CADMIUM_GLM_ENABLE // [cadmium_v2]
 #include <string>
 #include <vector>
 #endif
-#if 1 // [cadmium_v2]
+#if CADMIUM_GLM_ENABLE // [cadmium_v2]
 #include <nlohmann/json.hpp>
 #endif
 
 namespace cadmium::celldevs {
-#if 0 // [cadmium_v2]
+#if !CADMIUM_GLM_ENABLE // [cadmium_v2]
 	using coordinates = std::vector<int>;  //!< Type alias for referring to cell coordinates
 #endif
-#if 1 // [cadmium_v2]
+#if CADMIUM_GLM_ENABLE // [cadmium_v2]
 	using coordinates = glm::ivec2;  //!< Type alias for referring to cell coordinates
 #endif
 
@@ -40,7 +40,7 @@ namespace cadmium::celldevs {
 	 * @param v coordinates to be printed.
 	 * @return output stream containing the printed values of the coordinates.
 	*/
-#if 0 // [cadmium_v2]
+#if !CADMIUM_GLM_ENABLE // [cadmium_v2]
 	std::ostream &operator<<(std::ostream &os, const coordinates & v) {
 		os << "(";
 		std::string separator;
@@ -50,7 +50,7 @@ namespace cadmium::celldevs {
 		}
 		os << ")";
 #endif
-#if 1 // [cadmium_v2]
+#if CADMIUM_GLM_ENABLE // [cadmium_v2]
 	inline std::ostream &operator<<(std::ostream &os, const coordinates & v) {
 		os << v.x << "," << v.y;
 #endif
@@ -58,7 +58,7 @@ namespace cadmium::celldevs {
 	}
 }  //namespace cadmium::celldevs
 
-#if 0 // [cadmium_v2]
+#if !CADMIUM_GLM_ENABLE // [cadmium_v2]
 /**
  * @brief Auxiliary hash container for vectors.
  *
@@ -78,7 +78,7 @@ struct std::hash<std::vector<T>> {
 		for(const auto &i: vec) {
 			seed ^= hash<T>()(i) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 #endif
-#if 1 // [cadmium_v2]
+#if CADMIUM_GLM_ENABLE // [cadmium_v2]
 namespace nlohmann {
 	template <>
 	struct adl_serializer<cadmium::celldevs::coordinates> {
@@ -87,12 +87,12 @@ namespace nlohmann {
 			value.y = j.at(1).get<int>();
 #endif
 		}
-#if 0 // [cadmium_v2]
+#if !CADMIUM_GLM_ENABLE // [cadmium_v2]
 		return seed;
 	}
 };
 #endif
-#if 1 // [cadmium_v2]
+#if CADMIUM_GLM_ENABLE // [cadmium_v2]
 	};
 }  // namespace nlohmann
 #endif
