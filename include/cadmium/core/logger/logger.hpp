@@ -71,6 +71,7 @@ namespace cadmium {
          */
         virtual void logTime(double time) {}
 
+#if 0 // [cadmium_v2]
         /**
          * Virtual method to log atomic models' output messages.
          * @param time current simulation time.
@@ -80,6 +81,7 @@ namespace cadmium {
          * @param output string representation of the output message.
          */
         virtual void logOutput(double time, long modelId, const std::string& modelName, const std::string& portName, const std::string& output) = 0;
+#endif
 
         /**
          * Virtual method to log atomic models' states.

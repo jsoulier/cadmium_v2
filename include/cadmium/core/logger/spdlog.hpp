@@ -8,7 +8,7 @@
 #ifndef CADMIUM_CORE_LOGGER_SPDLOG_HPP_
 #define CADMIUM_CORE_LOGGER_SPDLOG_HPP_
 
-#if USE_SPDLOG
+#if SPDLOG_ENABLE
 
 #include <spdlog/async.h>
 #include <spdlog/sinks/basic_file_sink.h>
@@ -39,8 +39,6 @@ namespace cadmium {
         virtual void stop() override {
             logger->flush();
         }
-
-        virtual void logOutput(double time, long modelId, const std::string& modelName, const std::string& portName, const std::string& output) override {}
 
         virtual void logState(double time, long modelId, const std::string& modelName, const std::string& state) override {
             logger->info("{},{},{}", time, modelName, state);

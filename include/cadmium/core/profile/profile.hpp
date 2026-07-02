@@ -2,7 +2,7 @@
 #define CADMIUM_CORE_PROFILE_PROFILE_HPP_
 #if 1 // [cadmium_v2]
 
-#if USE_TRACY
+#if TRACY_ENABLE
 #include <tracy/Tracy.hpp>
 #define CADMIUM_PROFILE_TAG ZoneScoped
 #define CADMIUM_PROFILE_TAG_BLOCK(name) ZoneScopedN(name)

@@ -121,6 +121,7 @@ namespace cadmium {
             }
             if (logger != nullptr) {
                 logger->lock();  // TODO leave lock/unlock calls only for parallel execution
+#if 0 // [cadmium_v2]
                 if (time >= timeNext) {
                     for (const auto& outPort: model->getOutPorts()) {
                         for (std::size_t i = 0; i < outPort->size(); ++i) {
@@ -128,6 +129,7 @@ namespace cadmium {
                         }
                     }
                 }
+#endif
                 logger->logState(time, modelId, model->getId(), model->logState());
                 logger->unlock();  // TODO leave lock/unlock calls only for parallel execution
             }
